@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 import unittest
 
-from x_engine import money, pair_to_signal, passes_security, write_signal
+from x_engine import make_card, money, pair_to_signal, passes_security, write_signal
 
 
 def sample_pair():
@@ -63,4 +63,20 @@ class EngineTests(unittest.TestCase):
                 return Response()
 
         self.assertFalse(passes_security(Session(), signal))
+
+    def test_x_card_has_expected_dimensions(self):
+        pair, now_ms = sample_pair()
+        signal = pair_to_signal(pair, now_ms)
+
+        class Session:
+            def get(self, *args, **kwargs):
+                raise RuntimeError("No logo expected in fixture")
+
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from PIL import Image
+        with TemporaryDirectory() as directory:
+            output = make_card(signal, Session(), Path(directory) / "card.png")
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (1600, 900))
 
