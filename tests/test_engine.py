@@ -29,6 +29,11 @@ class EngineTests(unittest.TestCase):
         pair["liquidity"]["usd"] = 9000
         self.assertIsNone(pair_to_signal(pair, now_ms))
 
+    def test_flat_price_activity_is_not_momentum(self):
+        pair, now_ms = sample_pair()
+        pair["priceChange"] = {"m5": 0.2, "h1": 0.4}
+        self.assertIsNone(pair_to_signal(pair, now_ms))
+
     def test_post_contains_risk_and_contract(self):
         pair, now_ms = sample_pair()
         item = write_signal(pair_to_signal(pair, now_ms))
