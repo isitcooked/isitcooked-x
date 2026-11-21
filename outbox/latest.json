@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-11-21T18:03:50.298299+00:00",
+  "account": "@isitcooked1",
+  "requires_human_review": true,
+  "items": [
+    {
+      "type": "signal",
+      "priority": 80,
+      "text": "COOKED RADAR · SOLANA\n\n$JENSEN entered the radar.\nVolume arrived. Now we check whether structure can hold it.\n\n1H volume: $53.9K\nLiquidity: $81.0K\nBuy/sell: 5136/2510\n1H move: +0.4%\nCooked Score: 80/100\n\n--- THREAD ---\n\n$JENSEN · RISK CHECK\n\nPromising, not proven. Liquidity and holder behavior still matter.\n\nCA: DkHsZ1kjd2Fua8sgKE6PhHhyCdXYscbDVN7mAfiGpump\nhttps://dexscreener.com/solana/7fy71w6jdyias1w66sqscxvuutyh2n29bkcggaln4kxt\n\nSignal before noise. NFA.",
+      "thread": [
+        "COOKED RADAR · SOLANA\n\n$JENSEN entered the radar.\nVolume arrived. Now we check whether structure can hold it.\n\n1H volume: $53.9K\nLiquidity: $81.0K\nBuy/sell: 5136/2510\n1H move: +0.4%\nCooked Score: 80/100",
+        "$JENSEN · RISK CHECK\n\nPromising, not proven. Liquidity and holder behavior still matter.\n\nCA: DkHsZ1kjd2Fua8sgKE6PhHhyCdXYscbDVN7mAfiGpump\nhttps://dexscreener.com/solana/7fy71w6jdyias1w66sqscxvuutyh2n29bkcggaln4kxt\n\nSignal before noise. NFA."
+      ],
+      "signal": {
+        "chain": "solana",
+        "address": "DkHsZ1kjd2Fua8sgKE6PhHhyCdXYscbDVN7mAfiGpump",
+        "name": "Jensen Huang",
+        "symbol": "JENSEN",
+        "url": "https://dexscreener.com/solana/7fy71w6jdyias1w66sqscxvuutyh2n29bkcggaln4kxt",
+        "age_minutes": 1082.4,
+        "liquidity": 80953.4,
+        "volume_h1": 53949.08,
+        "change_m5": 13.36,
+        "change_h1": 0.41,
+        "buys_h1": 5136,
+        "sells_h1": 2510,
+        "fdv": 1121006.0,
+        "score": 80
+      }
+    }
+  ]
+}
