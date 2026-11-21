@@ -208,19 +208,27 @@ def write_signal(signal: Signal) -> dict[str, Any]:
         "A radar signal is a reason to investigate — never a reason to chase.",
         "Fast markets reverse fast. Verify the contract and size risk accordingly.",
     ])
-    text = (
+    first = (
         f"COOKED RADAR · {signal.chain.upper()}\n\n"
         f"${signal.symbol} entered the radar.\n{hook}\n\n"
         f"1H volume: {money(signal.volume_h1)}\n"
         f"Liquidity: {money(signal.liquidity)}\n"
         f"Buy/sell: {signal.buys_h1}/{signal.sells_h1}\n"
         f"1H move: {signal.change_h1:+.1f}%\n"
-        f"Cooked Score: {signal.score}/100\n\n"
-        f"{caution}\n\n"
-        f"CA: {signal.address}\n{signal.url}\n\n"
-        "Signal before noise. Not financial advice."
+        f"Cooked Score: {signal.score}/100"
     )
-    return {"type": "signal", "priority": signal.score, "text": text, "signal": asdict(signal)}
+    second = (
+        f"${signal.symbol} · RISK CHECK\n\n{caution}\n\n"
+        f"CA: {signal.address}\n{signal.url}\n\n"
+        "Signal before noise. NFA."
+    )
+    thread = [first, second]
+    if any(len(post) > 280 for post in thread):
+        raise ValueError("Generated X post exceeds 280 characters")
+    return {
+        "type": "signal", "priority": signal.score, "text": "\n\n--- THREAD ---\n\n".join(thread),
+        "thread": thread, "signal": asdict(signal),
+    }
 
 
 def write_no_signal() -> dict[str, Any]:
@@ -239,7 +247,9 @@ def notify_telegram(items: list[dict[str, Any]]) -> None:
         log.info("Editorial Telegram secrets absent; outbox only")
         return
     for item in items:
-        body = "X DRAFT — REVIEW BEFORE POSTING\n\n" + item["text"]
+        posts = item.get("thread") or [item["text"]]
+        numbered = "\n\n".join(f"[{index}/{len(posts)}]\n{post}" for index, post in enumerate(posts, 1))
+        body = "X DRAFT — REVIEW BEFORE POSTING\n\n" + numbered
         response = requests.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
             json={"chat_id": chat_id, "text": body, "disable_web_page_preview": True}, timeout=TIMEOUT,
