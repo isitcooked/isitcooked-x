@@ -231,6 +231,16 @@ def fetch_logo(session: requests.Session, url: str) -> Image.Image | None:
         return None
 
 
+def draw_chain_symbol(draw: ImageDraw.ImageDraw, chain: str, x: int, y: int) -> None:
+    """Draw crisp native-looking chain marks without external brand assets."""
+    if chain == "solana":
+        colors = ((73, 255, 189, 255), (92, 172, 255, 255), (168, 75, 255, 255))
+        for index, color in enumerate(colors):
+            top = y + index * 13
+            draw.polygon([(x+7, top), (x+48, top), (x+41, top+9), (x, top+9)], fill=color)
+    else:  # Base
+        draw.ellipse((x, y-2, x+46, y+44), fill=(0, 82, 255, 255))
+        draw.rounded_rectangle((x+10, y+15, x+37, y+23), radius=4, fill=(255, 255, 255, 255))
 def make_card(signal: Signal, session: requests.Session, path: Path = CARD_PATH) -> Path:
     """Render a premium 16:9 X card with a real token logo when available."""
     width, height = 1600, 900
@@ -251,16 +261,18 @@ def make_card(signal: Signal, session: requests.Session, path: Path = CARD_PATH)
     draw.text((90, 62), "IS IT COOKED?  /  COOKED RADAR", font=font(30, True), fill="#F5F7FF")
     draw.text((90, 112), "SIGNAL BEFORE NOISE", font=font(20, True), fill="#53E7FF")
     chain_name = signal.chain.upper()
-    badge_box = (1300, 66, 1510, 122)
+    badge_box = (1260, 62, 1510, 128)
     draw.rounded_rectangle(badge_box, radius=20, fill=(22, 25, 49, 230), outline=(156, 92, 255, 220), width=2)
-    tw = draw.textbbox((0, 0), chain_name, font=font(24, True))[2]
-    draw.text((1405-tw/2, 79), chain_name, font=font(24, True), fill="#FFFFFF")
+    draw_chain_symbol(draw, signal.chain, 1284, 77)
+    draw.text((1348, 80), chain_name, font=font(24, True), fill="#FFFFFF")
 
     # Token logo, integrated rather than pasted as a square.
     logo = fetch_logo(session, signal.image_url)
     logo_size = 250
     logo_box = (105, 245, 105+logo_size, 245+logo_size)
-    draw.ellipse((88, 228, 372, 512), fill=(8, 15, 32, 245), outline=(55, 230, 255, 230), width=5)
+    draw.ellipse((70, 210, 390, 530), fill=(0, 219, 255, 25), outline=(0, 219, 255, 40), width=12)
+    draw.ellipse((82, 222, 378, 518), fill=(135, 72, 255, 32), outline=(135, 72, 255, 75), width=7)
+    draw.ellipse((88, 228, 372, 512), fill=(8, 15, 32, 245), outline=(55, 230, 255, 235), width=5)
     if logo:
         logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
         canvas = Image.new("RGBA", (logo_size, logo_size), (0, 0, 0, 0))
@@ -277,9 +289,13 @@ def make_card(signal: Signal, session: requests.Session, path: Path = CARD_PATH)
     # Identity and score.
     draw.text((420, 225), signal.name.upper()[:28], font=font(32, True), fill="#AAB5CA")
     draw.text((420, 270), f"${signal.symbol}", font=font(82, True), fill="#FFFFFF")
-    draw.text((420, 375), "COOKED SCORE", font=font(22, True), fill="#7F91AC")
-    draw.text((420, 408), f"{signal.score}", font=font(84, True), fill="#53E7FF")
-    draw.text((535, 458), "/100", font=font(28, True), fill="#9D6CFF")
+    draw.rounded_rectangle((420, 382, 690, 506), radius=24, fill=(8, 16, 34, 235), outline=(48, 224, 255, 175), width=2)
+    draw.text((445, 400), "COOKED SCORE", font=font(19, True), fill="#7F91AC")
+    draw.text((445, 428), f"{signal.score}", font=font(61, True), fill="#53E7FF")
+    draw.text((540, 462), "/100", font=font(22, True), fill="#9D6CFF")
+    draw.rounded_rectangle((420, 525, 720, 575), radius=18, fill=(18, 55, 52, 220), outline=(101, 244, 196, 165), width=2)
+    draw.ellipse((443, 544, 455, 556), fill=(101, 244, 196, 255))
+    draw.text((472, 538), "MOMENTUM CONFIRMED", font=font(15, True), fill="#65F4C4")
 
     metrics = [
         ("1H VOLUME", money(signal.volume_h1)),
