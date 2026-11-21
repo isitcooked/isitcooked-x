@@ -106,11 +106,18 @@ def pair_to_signal(pair: dict[str, Any], now_ms: int) -> Signal | None:
     volume = num(pair.get("volume", {}).get("h1"))
     txns = pair.get("txns", {}).get("h1", {})
     buys, sells = int(txns.get("buys", 0)), int(txns.get("sells", 0))
+    change_m5 = num(pair.get("priceChange", {}).get("m5"))
     change_h1 = num(pair.get("priceChange", {}).get("h1"))
     # Selectivity is the product: no signal is better than a low-quality signal.
     if not (5 <= age <= 1_440 and liquidity >= 20_000 and volume >= 30_000):
         return None
-    if buys + sells < 35 or buys <= sells or change_h1 <= 0 or change_h1 > 180:
+    # Activity alone is not momentum. Demand a meaningful move in at least one
+    # short window and enough turnover relative to available liquidity.
+    has_momentum = change_h1 >= 5 or change_m5 >= 3
+    turnover = volume / liquidity if liquidity else 0
+    if buys + sells < 35 or buys <= sells or not has_momentum or change_h1 > 180:
+        return None
+    if turnover < 0.40:
         return None
     base = pair.get("baseToken", {})
     address = str(base.get("address", "")).strip()
@@ -120,7 +127,7 @@ def pair_to_signal(pair: dict[str, Any], now_ms: int) -> Signal | None:
         chain=chain, address=address, name=str(base.get("name", "Unknown"))[:40],
         symbol=re.sub(r"[^A-Za-z0-9_]", "", str(base.get("symbol", "TOKEN")))[:15],
         url=str(pair.get("url", "")), age_minutes=round(age, 1), liquidity=liquidity,
-        volume_h1=volume, change_m5=num(pair.get("priceChange", {}).get("m5")),
+        volume_h1=volume, change_m5=change_m5,
         change_h1=change_h1, buys_h1=buys, sells_h1=sells,
         fdv=num(pair.get("marketCap") or pair.get("fdv")), score=score_pair(pair, age),
     )
