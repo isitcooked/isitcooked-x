@@ -117,7 +117,7 @@ def pair_to_signal(pair: dict[str, Any], now_ms: int) -> Signal | None:
         return None
     # Activity alone is not momentum. Demand a meaningful move in at least one
     # short window and enough turnover relative to available liquidity.
-    has_momentum = change_h1 >= 5 or change_m5 >= 3
+    has_momentum = change_h1 > 0 and (change_h1 >= 5 or change_m5 >= 3)
     turnover = volume / liquidity if liquidity else 0
     if buys + sells < 35 or buys <= sells or not has_momentum or change_h1 > 180:
         return None
