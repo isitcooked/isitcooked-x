@@ -12,12 +12,14 @@ import logging
 import os
 import random
 import re
+from io import BytesIO
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import requests
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 DEX_BOOSTS = "https://api.dexscreener.com/token-boosts/latest/v1"
 DEX_TOKEN = "https://api.dexscreener.com/latest/dex/tokens/{address}"
@@ -26,6 +28,7 @@ GOPLUS_BASE = "https://api.gopluslabs.io/api/v1/token_security/8453"
 CHAINS = {"solana", "base"}
 STATE_PATH = Path("data/state.json")
 OUTBOX_PATH = Path("outbox/latest.json")
+CARD_PATH = Path("outbox/latest-card.png")
 TIMEOUT = 15
 MAX_CANDIDATES = 35
 
@@ -49,6 +52,7 @@ class Signal:
     sells_h1: int
     fdv: float
     score: int
+    image_url: str = ""
 
 
 def num(value: Any) -> float:
@@ -130,6 +134,7 @@ def pair_to_signal(pair: dict[str, Any], now_ms: int) -> Signal | None:
         volume_h1=volume, change_m5=change_m5,
         change_h1=change_h1, buys_h1=buys, sells_h1=sells,
         fdv=num(pair.get("marketCap") or pair.get("fdv")), score=score_pair(pair, age),
+        image_url=str(pair.get("info", {}).get("imageUrl", "")),
     )
     return signal if signal.score >= 70 else None
 
@@ -199,6 +204,109 @@ def money(value: float) -> str:
     return f"${value:.0f}"
 
 
+def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    name = "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"
+    for path in (f"/usr/share/fonts/truetype/dejavu/{name}", name):
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+
+
+def fetch_logo(session: requests.Session, url: str) -> Image.Image | None:
+    if not url.startswith("https://"):
+        return None
+    try:
+        response = session.get(url, timeout=TIMEOUT, headers={"User-Agent": "isitcooked-x/1.0"})
+        response.raise_for_status()
+        if len(response.content) > 5_000_000:
+            return None
+        image = Image.open(BytesIO(response.content))
+        image.load()
+        if image.width < 32 or image.height < 32 or image.width * image.height > 16_000_000:
+            return None
+        return image.convert("RGBA")
+    except (requests.RequestException, OSError, ValueError):
+        return None
+
+
+def make_card(signal: Signal, session: requests.Session, path: Path = CARD_PATH) -> Path:
+    """Render a premium 16:9 X card with a real token logo when available."""
+    width, height = 1600, 900
+    image = Image.new("RGB", (width, height), "#040710")
+    draw = ImageDraw.Draw(image, "RGBA")
+    # Atmospheric gradient and radar geometry.
+    for y in range(height):
+        ratio = y / height
+        draw.line((0, y, width, y), fill=(3 + int(8 * ratio), 7, 20 + int(16 * ratio), 255))
+    for radius, alpha in ((620, 55), (470, 70), (320, 90), (180, 110)):
+        box = (90-radius, 450-radius, 90+radius, 450+radius)
+        draw.ellipse(box, outline=(0, 220, 255, alpha), width=3)
+    draw.polygon([(90, 450), (680, 110), (570, 520)], fill=(0, 220, 255, 34))
+    for x in range(950, 1600, 130):
+        draw.line((x, 0, x-420, 900), fill=(131, 69, 255, 22), width=2)
+
+    # Header.
+    draw.text((90, 62), "IS IT COOKED?  /  COOKED RADAR", font=font(30, True), fill="#F5F7FF")
+    draw.text((90, 112), "SIGNAL BEFORE NOISE", font=font(20, True), fill="#53E7FF")
+    chain_name = signal.chain.upper()
+    badge_box = (1300, 66, 1510, 122)
+    draw.rounded_rectangle(badge_box, radius=20, fill=(22, 25, 49, 230), outline=(156, 92, 255, 220), width=2)
+    tw = draw.textbbox((0, 0), chain_name, font=font(24, True))[2]
+    draw.text((1405-tw/2, 79), chain_name, font=font(24, True), fill="#FFFFFF")
+
+    # Token logo, integrated rather than pasted as a square.
+    logo = fetch_logo(session, signal.image_url)
+    logo_size = 250
+    logo_box = (105, 245, 105+logo_size, 245+logo_size)
+    draw.ellipse((88, 228, 372, 512), fill=(8, 15, 32, 245), outline=(55, 230, 255, 230), width=5)
+    if logo:
+        logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
+        canvas = Image.new("RGBA", (logo_size, logo_size), (0, 0, 0, 0))
+        canvas.alpha_composite(logo, ((logo_size-logo.width)//2, (logo_size-logo.height)//2))
+        mask = Image.new("L", (logo_size, logo_size), 0)
+        ImageDraw.Draw(mask).ellipse((0, 0, logo_size, logo_size), fill=255)
+        canvas.putalpha(mask)
+        image.paste(canvas, (105, 245), canvas)
+    else:
+        initials = signal.symbol[:3]
+        box = draw.textbbox((0, 0), initials, font=font(64, True))
+        draw.text((230-(box[2]-box[0])/2, 370-(box[3]-box[1])/2), initials, font=font(64, True), fill="#FFFFFF")
+
+    # Identity and score.
+    draw.text((420, 225), signal.name.upper()[:28], font=font(32, True), fill="#AAB5CA")
+    draw.text((420, 270), f"${signal.symbol}", font=font(82, True), fill="#FFFFFF")
+    draw.text((420, 375), "COOKED SCORE", font=font(22, True), fill="#7F91AC")
+    draw.text((420, 408), f"{signal.score}", font=font(84, True), fill="#53E7FF")
+    draw.text((535, 458), "/100", font=font(28, True), fill="#9D6CFF")
+
+    metrics = [
+        ("1H VOLUME", money(signal.volume_h1)),
+        ("LIQUIDITY", money(signal.liquidity)),
+        ("1H MOVE", f"{signal.change_h1:+.1f}%"),
+        ("BUY / SELL", f"{signal.buys_h1:,} / {signal.sells_h1:,}"),
+    ]
+    start_x, start_y = 760, 250
+    for index, (label, value) in enumerate(metrics):
+        col, row = index % 2, index // 2
+        x, y = start_x + col * 400, start_y + row * 180
+        draw.rounded_rectangle((x, y, x+350, y+135), radius=18, fill=(12, 18, 38, 225), outline=(52, 74, 112, 200), width=2)
+        draw.text((x+24, y+22), label, font=font(19, True), fill="#7F91AC")
+        color = "#65F4C4" if label == "1H MOVE" and signal.change_h1 >= 0 else "#FFFFFF"
+        draw.text((x+24, y+58), value, font=font(40, True), fill=color)
+
+    ca = signal.address
+    short_ca = f"{ca[:8]}...{ca[-8:]}"
+    draw.rounded_rectangle((90, 742, 1510, 825), radius=18, fill=(7, 11, 25, 235), outline=(52, 74, 112, 200), width=2)
+    draw.text((120, 765), "CONTRACT", font=font(18, True), fill="#7F91AC")
+    draw.text((285, 754), short_ca, font=font(31, True), fill="#FFFFFF")
+    draw.text((1190, 765), "VERIFY · NFA", font=font(18, True), fill="#9D6CFF")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.save(path, "PNG", optimize=True)
+    return path
+
+
 def choose(seed: str, options: list[str]) -> str:
     return random.Random(int(hashlib.sha256(seed.encode()).hexdigest()[:12], 16)).choice(options)
 
@@ -248,7 +356,7 @@ def write_no_signal() -> dict[str, Any]:
     return {"type": "market_status", "priority": 30, "text": text}
 
 
-def notify_telegram(items: list[dict[str, Any]]) -> None:
+def notify_telegram(items: list[dict[str, Any]], card_path: Path | None = None) -> None:
     token, chat_id = os.getenv("EDITOR_TELEGRAM_TOKEN"), os.getenv("EDITOR_CHAT_ID")
     if not token or not chat_id:
         log.info("Editorial Telegram secrets absent; outbox only")
@@ -262,6 +370,14 @@ def notify_telegram(items: list[dict[str, Any]]) -> None:
             json={"chat_id": chat_id, "text": body, "disable_web_page_preview": True}, timeout=TIMEOUT,
         )
         response.raise_for_status()
+        if card_path and card_path.exists():
+            with card_path.open("rb") as card:
+                photo = requests.post(
+                    f"https://api.telegram.org/bot{token}/sendPhoto",
+                    data={"chat_id": chat_id, "caption": "X CARD — attach this image to post [1/2]"},
+                    files={"photo": (card_path.name, card, "image/png")}, timeout=30,
+                )
+            photo.raise_for_status()
 
 
 def run(dry_run: bool = False) -> list[dict[str, Any]]:
@@ -274,6 +390,10 @@ def run(dry_run: bool = False) -> list[dict[str, Any]]:
     now = datetime.now(timezone.utc).isoformat()
     payload = {"generated_at": now, "account": "@isitcooked1", "requires_human_review": True, "items": items}
     save_json(OUTBOX_PATH, payload)
+    card_path = None
+    if fresh:
+        with requests.Session() as media_session:
+            card_path = make_card(fresh[0], media_session)
     if not dry_run:
         if fresh:
             seen[fresh[0].address] = {"first_seen": now, "score": fresh[0].score, "symbol": fresh[0].symbol}
@@ -285,7 +405,7 @@ def run(dry_run: bool = False) -> list[dict[str, Any]]:
         state["last_run"] = now
         save_json(STATE_PATH, state)
         try:
-            notify_telegram(items)
+            notify_telegram(items, card_path)
         except requests.RequestException as exc:
             log.warning("Telegram editorial delivery failed: %s", exc)
     log.info("Generated %s editorial item(s); %s clean signal(s) found", len(items), len(signals))
