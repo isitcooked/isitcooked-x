@@ -34,6 +34,11 @@ class EngineTests(unittest.TestCase):
         pair["priceChange"] = {"m5": 0.2, "h1": 0.4}
         self.assertIsNone(pair_to_signal(pair, now_ms))
 
+    def test_short_bounce_inside_negative_hour_is_rejected(self):
+        pair, now_ms = sample_pair()
+        pair["priceChange"] = {"m5": 6.0, "h1": -6.8}
+        self.assertIsNone(pair_to_signal(pair, now_ms))
+
     def test_post_contains_risk_and_contract(self):
         pair, now_ms = sample_pair()
         item = write_signal(pair_to_signal(pair, now_ms))
