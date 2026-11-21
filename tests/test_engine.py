@@ -31,10 +31,12 @@ class EngineTests(unittest.TestCase):
 
     def test_post_contains_risk_and_contract(self):
         pair, now_ms = sample_pair()
-        post = write_signal(pair_to_signal(pair, now_ms))["text"]
+        item = write_signal(pair_to_signal(pair, now_ms))
+        post = item["text"]
         self.assertIn("CA: ABC123", post)
-        self.assertIn("Not financial advice", post)
+        self.assertIn("NFA", post)
         self.assertIn("Cooked Score", post)
+        self.assertTrue(all(len(part) <= 280 for part in item["thread"]))
 
     def test_money_format(self):
         self.assertEqual(money(1_250_000), "$1.25M")
