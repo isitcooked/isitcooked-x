@@ -1,33 +1,12 @@
 {
-  "generated_at": "2026-11-22T08:54:35.708671+00:00",
+  "generated_at": "2026-11-22T12:58:57.744836+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "type": "signal",
-      "priority": 87,
-      "text": "COOKED RADAR · SOLANA\n\n$PushCoin entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $61.8K\nLiquidity: $91.9K\nBuy/sell: 8345/7497\n1H move: +12.3%\nCooked Score: 87/100\n\n--- THREAD ---\n\n$PushCoin · RISK CHECK\n\nFast markets reverse fast. Verify the contract and size risk accordingly.\n\nCA: 3N6Mp8YQuVDfEtyuyJS72s4MRrgQuKY34gvYZD5Kpump\nhttps://dexscreener.com/solana/gz6zuqpbwrcdfbl9aspyahdmyk3fnpv1am719rylmyzf\n\nSignal before noise. NFA.",
-      "thread": [
-        "COOKED RADAR · SOLANA\n\n$PushCoin entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $61.8K\nLiquidity: $91.9K\nBuy/sell: 8345/7497\n1H move: +12.3%\nCooked Score: 87/100",
-        "$PushCoin · RISK CHECK\n\nFast markets reverse fast. Verify the contract and size risk accordingly.\n\nCA: 3N6Mp8YQuVDfEtyuyJS72s4MRrgQuKY34gvYZD5Kpump\nhttps://dexscreener.com/solana/gz6zuqpbwrcdfbl9aspyahdmyk3fnpv1am719rylmyzf\n\nSignal before noise. NFA."
-      ],
-      "signal": {
-        "chain": "solana",
-        "address": "3N6Mp8YQuVDfEtyuyJS72s4MRrgQuKY34gvYZD5Kpump",
-        "name": "PushCoin",
-        "symbol": "PushCoin",
-        "url": "https://dexscreener.com/solana/gz6zuqpbwrcdfbl9aspyahdmyk3fnpv1am719rylmyzf",
-        "age_minutes": 419.4,
-        "liquidity": 91927.05,
-        "volume_h1": 61844.15,
-        "change_m5": -1.07,
-        "change_h1": 12.3,
-        "buys_h1": 8345,
-        "sells_h1": 7497,
-        "fdv": 1659419.0,
-        "score": 87,
-        "image_url": "https://cdn.dexscreener.com/cms/images/vrujVMvuEX9w9SKZ?width=800&height=800&quality=95&format=auto"
-      }
+      "type": "market_status",
+      "priority": 30,
+      "text": "Not every green candle deserves an alert.\n\nToday the radar sees activity — not conviction. We stay selective."
     }
   ]
 }
