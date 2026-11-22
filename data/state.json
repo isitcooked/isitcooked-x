@@ -10,8 +10,13 @@
       "first_seen": "2026-11-21T18:08:36.273474+00:00",
       "score": 80,
       "symbol": "MAYA"
+    },
+    "3N6Mp8YQuVDfEtyuyJS72s4MRrgQuKY34gvYZD5Kpump": {
+      "first_seen": "2026-11-22T08:54:35.708671+00:00",
+      "score": 87,
+      "symbol": "PushCoin"
     }
   },
   "recent_hooks": [],
-  "last_run": "2026-11-21T20:48:08.246252+00:00"
+  "last_run": "2026-11-22T08:54:35.708671+00:00"
 }
