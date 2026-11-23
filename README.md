@@ -22,13 +22,18 @@ GitHub Actions runs at 08:17, 12:17, 16:17 and 20:17 UTC. It:
 
 1. reads free DexScreener data;
 2. rejects weak or late-stage candidates;
-3. generates one concise English draft;
+3. generates one concise English draft from a clean signal or a rotating
+   growth library (education, opinion, conversation, culture and receipts);
 4. saves `outbox/latest.json`;
 5. optionally delivers the draft to a private Telegram chat;
 6. keeps a bounded anti-duplication history.
 
 No clean signal is a valid result. The brand never forces a token call merely to
-fill a content slot.
+fill a content slot. Instead, the engine publishes useful evergreen thinking.
+
+The workflow prepares three opportunities per day at 09:17, 14:17 and 19:17
+UTC. Publish the best two; quality remains more important than filling every
+slot.
 
 ## Optional private editorial delivery
 

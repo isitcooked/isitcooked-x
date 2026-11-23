@@ -372,6 +372,105 @@ def write_no_signal() -> dict[str, Any]:
     return {"type": "market_status", "priority": 30, "text": text}
 
 
+# Evergreen posts give a new account reasons to follow even when no token earns
+# a signal. They are deliberately opinionated, useful and short enough to quote.
+EDITORIAL_LIBRARY = [
+    {
+        "pillar": "contrarian", "headline": "VIRAL IS NOT LIQUID", "subhead": "Attention can enter faster than you can exit.",
+        "text": "A memecoin can be viral and still be untradeable.\n\nFollowers measure attention. Liquidity measures the exit door.\n\nNever confuse the two."
+    },
+    {
+        "pillar": "education", "headline": "MARKET CAP CAN LIE", "subhead": "The exit door is called liquidity.",
+        "text": "The fastest 10-second token check:\n\n1. Verify the contract\n2. Check liquidity\n3. Compare volume to liquidity\n4. Read buys vs sells\n5. Inspect holder concentration\n\nPrice comes last."
+    },
+    {
+        "pillar": "conversation", "headline": "WHAT MAKES YOU SKIP?", "subhead": "One red flag. No second chances.",
+        "text": "You get one reason to reject a new memecoin instantly.\n\nLow liquidity?\nConcentrated holders?\nUnlocked LP?\nAnonymous team?\nFake engagement?\n\nWhat is your non-negotiable red flag?"
+    },
+    {
+        "pillar": "culture", "headline": "THE CHART: +400%", "subhead": "MY ENTRY: the exact local top.",
+        "text": "The chart before I buy: +400%\n\nThe chart after I buy: a forensic investigation.\n\nChasing is not a strategy."
+    },
+    {
+        "pillar": "contrarian", "headline": "NO SIGNAL IS A SIGNAL", "subhead": "Selectivity is the product.",
+        "text": "If your alpha account has a new ‘gem’ every hour, the product is not research.\n\nThe product is your attention.\n\nA serious radar must be allowed to say nothing."
+    },
+    {
+        "pillar": "education", "headline": "VOLUME NEEDS CONTEXT", "subhead": "Big numbers can still be empty.",
+        "text": "Volume alone proves activity — not conviction.\n\nAsk three questions:\n• Is liquidity deep enough?\n• Are transactions broad or bot-driven?\n• Does buy pressure persist beyond one candle?"
+    },
+    {
+        "pillar": "conversation", "headline": "BUILD THE PERFECT RADAR", "subhead": "Choose only three metrics.",
+        "text": "You can keep only three metrics on a memecoin radar.\n\nLiquidity. Volume. Holder concentration. Buy pressure. Pair age. Social velocity.\n\nWhich three survive?"
+    },
+    {
+        "pillar": "culture", "headline": "DYOR, THEY SAID", "subhead": "So I opened 37 tabs.",
+        "text": "Crypto research starter pack:\n\n12 scanners. 8 dashboards. 37 tabs. One contract copied from the wrong account.\n\nVerify the CA first. Everything else comes second."
+    },
+    {
+        "pillar": "authority", "headline": "PUBLIC RECEIPTS > HYPE", "subhead": "Wins and losses stay visible.",
+        "text": "Anyone can screenshot a winner.\n\nAuthority starts when every signal gets a public receipt — including the ugly ones.\n\nNo deleted misses. No invented certainty."
+    },
+    {
+        "pillar": "education", "headline": "BUY PRESSURE CAN FAKE YOU", "subhead": "Count quality, not only quantity.",
+        "text": "1,000 buys and 400 sells looks bullish.\n\nUntil 980 buys are dust-sized bot transactions.\n\nTransaction count needs trade-size and wallet context."
+    },
+    {
+        "pillar": "conversation", "headline": "HONEST ANSWERS ONLY", "subhead": "What was your most expensive lesson?",
+        "text": "What cost you more in crypto?\n\nA rug.\nA bad entry.\nRefusing to take profit.\nOr trusting someone else’s conviction?\n\nHonest answers only."
+    },
+    {
+        "pillar": "culture", "headline": "ME: I WILL WAIT", "subhead": "Also me: buys candle number nine.",
+        "text": "Me: I’ll wait for confirmation.\n\nAlso me after nine green candles: this entry looks early.\n\nThe market charges tuition for impatience."
+    },
+]
+
+
+def write_editorial(now: datetime | None = None) -> dict[str, Any]:
+    now = now or datetime.now(timezone.utc)
+    # Each four-hour window gets a stable draft, while consecutive runs rotate.
+    slot = now.toordinal() * 6 + now.hour // 4
+    item = EDITORIAL_LIBRARY[slot % len(EDITORIAL_LIBRARY)]
+    text = item["text"] + "\n\nSignal before noise."
+    if len(text) > 280:
+        raise ValueError("Generated editorial post exceeds 280 characters")
+    return {**item, "type": "editorial", "priority": 50, "text": text}
+
+
+def make_editorial_card(item: dict[str, Any], path: Path = CARD_PATH) -> Path:
+    """Render an original shareable brand card instead of recycled meme art."""
+    width, height = 1600, 900
+    image = Image.new("RGB", (width, height), "#040710")
+    draw = ImageDraw.Draw(image, "RGBA")
+    for y in range(height):
+        draw.line((0, y, width, y), fill=(4, 7 + y // 140, 17 + y // 45, 255))
+    for radius, alpha in ((620, 40), (450, 55), (290, 75), (140, 100)):
+        draw.ellipse((800-radius, 450-radius, 800+radius, 450+radius), outline=(42, 222, 255, alpha), width=3)
+    draw.polygon([(800, 450), (1530, 120), (1440, 690)], fill=(142, 74, 255, 28))
+    draw.text((85, 65), "IS IT COOKED?", font=font(31, True), fill="#FFFFFF")
+    draw.text((85, 112), "SIGNAL BEFORE NOISE", font=font(19, True), fill="#53E7FF")
+    badge = str(item.get("pillar", "editorial")).upper()
+    draw.rounded_rectangle((1260, 65, 1510, 120), radius=18, fill=(22, 25, 49, 230), outline=(156, 92, 255, 210), width=2)
+    draw.text((1285, 80), badge[:18], font=font(18, True), fill="#FFFFFF")
+    headline = str(item["headline"])
+    lines = headline.split("\n")
+    y = 285 if len(lines) == 1 else 235
+    for line in lines:
+        box = draw.textbbox((0, 0), line, font=font(72, True))
+        draw.text(((width - (box[2]-box[0]))/2, y), line, font=font(72, True), fill="#FFFFFF")
+        y += 92
+    subhead = str(item["subhead"])
+    box = draw.textbbox((0, 0), subhead, font=font(30, False))
+    draw.text(((width - (box[2]-box[0]))/2, y+42), subhead, font=font(30, False), fill="#AAB5CA")
+    draw.rounded_rectangle((470, 660, 1130, 730), radius=24, fill=(7, 15, 32, 220), outline=(45, 219, 255, 155), width=2)
+    footer = "ON-CHAIN INTELLIGENCE  /  PUBLIC RECEIPTS"
+    box = draw.textbbox((0, 0), footer, font=font(20, True))
+    draw.text(((width - (box[2]-box[0]))/2, 682), footer, font=font(20, True), fill="#65F4C4")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.save(path, "PNG", optimize=True)
+    return path
+
+
 def notify_telegram(items: list[dict[str, Any]], card_path: Path | None = None) -> None:
     token, chat_id = os.getenv("EDITOR_TELEGRAM_TOKEN"), os.getenv("EDITOR_CHAT_ID")
     if not token or not chat_id:
@@ -390,7 +489,7 @@ def notify_telegram(items: list[dict[str, Any]], card_path: Path | None = None) 
             with card_path.open("rb") as card:
                 photo = requests.post(
                     f"https://api.telegram.org/bot{token}/sendPhoto",
-                    data={"chat_id": chat_id, "caption": "X CARD — attach this image to post [1/2]"},
+                    data={"chat_id": chat_id, "caption": "X VISUAL — attach this image to the draft above"},
                     files={"photo": (card_path.name, card, "image/png")}, timeout=30,
                 )
             photo.raise_for_status()
@@ -402,7 +501,7 @@ def run(dry_run: bool = False) -> list[dict[str, Any]]:
     with requests.Session() as session:
         signals = discover(session)
     fresh = [signal for signal in signals if signal.address not in seen]
-    items = [write_signal(fresh[0])] if fresh else [write_no_signal()]
+    items = [write_signal(fresh[0])] if fresh else [write_editorial()]
     now = datetime.now(timezone.utc).isoformat()
     payload = {"generated_at": now, "account": "@isitcooked1", "requires_human_review": True, "items": items}
     save_json(OUTBOX_PATH, payload)
@@ -410,6 +509,8 @@ def run(dry_run: bool = False) -> list[dict[str, Any]]:
     if fresh:
         with requests.Session() as media_session:
             card_path = make_card(fresh[0], media_session)
+    else:
+        card_path = make_editorial_card(items[0])
     if not dry_run:
         if fresh:
             seen[fresh[0].address] = {"first_seen": now, "score": fresh[0].score, "symbol": fresh[0].symbol}

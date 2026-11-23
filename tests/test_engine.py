@@ -1,7 +1,10 @@
 from datetime import datetime, timezone
 import unittest
 
-from x_engine import make_card, money, pair_to_signal, passes_security, write_signal
+from x_engine import (
+    EDITORIAL_LIBRARY, make_card, make_editorial_card, money, pair_to_signal,
+    passes_security, write_editorial, write_signal,
+)
 
 
 def sample_pair():
@@ -82,6 +85,25 @@ class EngineTests(unittest.TestCase):
         from PIL import Image
         with TemporaryDirectory() as directory:
             output = make_card(signal, Session(), Path(directory) / "card.png")
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (1600, 900))
+
+    def test_editorial_library_is_varied_and_x_safe(self):
+        self.assertGreaterEqual(len(EDITORIAL_LIBRARY), 12)
+        self.assertGreaterEqual(len({item["pillar"] for item in EDITORIAL_LIBRARY}), 4)
+        for item in EDITORIAL_LIBRARY:
+            self.assertTrue(item["headline"])
+            self.assertLessEqual(len(item["text"] + "\n\nSignal before noise."), 280)
+
+    def test_editorial_draft_and_card(self):
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from PIL import Image
+        item = write_editorial(datetime(2026, 11, 23, 9, tzinfo=timezone.utc))
+        self.assertEqual(item["type"], "editorial")
+        self.assertIn("Signal before noise", item["text"])
+        with TemporaryDirectory() as directory:
+            output = make_editorial_card(item, Path(directory) / "editorial.png")
             with Image.open(output) as image:
                 self.assertEqual(image.size, (1600, 900))
 

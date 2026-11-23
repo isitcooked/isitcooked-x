@@ -2,7 +2,8 @@ name: X Editorial Engine
 
 on:
   schedule:
-    - cron: "17 8,12,16,20 * * *"
+    # Three editorial opportunities per day. The owner can publish the best two.
+    - cron: "17 9,14,19 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
