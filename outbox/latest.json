@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-11-23T09:29:54.689773+00:00",
+  "generated_at": "2026-11-23T13:25:57.973726+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
       "type": "signal",
-      "priority": 96,
-      "text": "COOKED RADAR · SOLANA\n\n$UCASH entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $161.6K\nLiquidity: $58.5K\nBuy/sell: 4693/1012\n1H move: +22.4%\nCooked Score: 96/100\n\n--- THREAD ---\n\n$UCASH · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: 7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump\nhttps://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt\n\nSignal before noise. NFA.",
+      "priority": 87,
+      "text": "COOKED RADAR · SOLANA\n\n$COPIUM entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $51.7K\nLiquidity: $64.7K\nBuy/sell: 1020/739\n1H move: +21.5%\nCooked Score: 87/100\n\n--- THREAD ---\n\n$COPIUM · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: BAKsQrynzwadyACDMsg3J5R8a4CTvj1u7kEYyjq7pump\nhttps://dexscreener.com/solana/8rjw3dbbzfzkyf5tinesjqpyjtepzg8dz7dnb2sebupp\n\nSignal before noise. NFA.",
       "thread": [
-        "COOKED RADAR · SOLANA\n\n$UCASH entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $161.6K\nLiquidity: $58.5K\nBuy/sell: 4693/1012\n1H move: +22.4%\nCooked Score: 96/100",
-        "$UCASH · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: 7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump\nhttps://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt\n\nSignal before noise. NFA."
+        "COOKED RADAR · SOLANA\n\n$COPIUM entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $51.7K\nLiquidity: $64.7K\nBuy/sell: 1020/739\n1H move: +21.5%\nCooked Score: 87/100",
+        "$COPIUM · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: BAKsQrynzwadyACDMsg3J5R8a4CTvj1u7kEYyjq7pump\nhttps://dexscreener.com/solana/8rjw3dbbzfzkyf5tinesjqpyjtepzg8dz7dnb2sebupp\n\nSignal before noise. NFA."
       ],
       "signal": {
         "chain": "solana",
-        "address": "7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump",
-        "name": "Umbra Cash",
-        "symbol": "UCASH",
-        "url": "https://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt",
-        "age_minutes": 1334.8,
-        "liquidity": 58480.24,
-        "volume_h1": 161589.62,
-        "change_m5": -1.33,
-        "change_h1": 22.44,
-        "buys_h1": 4693,
-        "sells_h1": 1012,
-        "fdv": 564192.0,
-        "score": 96,
-        "image_url": "https://cdn.dexscreener.com/cms/images/P-SyG8Pw8NHzj2jL?width=800&height=800&quality=95&format=auto"
+        "address": "BAKsQrynzwadyACDMsg3J5R8a4CTvj1u7kEYyjq7pump",
+        "name": "COPIUM",
+        "symbol": "COPIUM",
+        "url": "https://dexscreener.com/solana/8rjw3dbbzfzkyf5tinesjqpyjtepzg8dz7dnb2sebupp",
+        "age_minutes": 943.6,
+        "liquidity": 64685.17,
+        "volume_h1": 51728.86,
+        "change_m5": 10.27,
+        "change_h1": 21.49,
+        "buys_h1": 1020,
+        "sells_h1": 739,
+        "fdv": 755327.0,
+        "score": 87,
+        "image_url": "https://cdn.dexscreener.com/cms/images/Xh9MBcWrlb_vVKve?width=800&height=800&quality=95&format=auto"
       }
     }
   ]
