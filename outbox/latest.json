@@ -1,12 +1,33 @@
 {
-  "generated_at": "2026-11-22T20:50:43.974806+00:00",
+  "generated_at": "2026-11-23T09:29:54.689773+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "type": "market_status",
-      "priority": 30,
-      "text": "Not every green candle deserves an alert.\n\nToday the radar sees activity — not conviction. We stay selective."
+      "type": "signal",
+      "priority": 96,
+      "text": "COOKED RADAR · SOLANA\n\n$UCASH entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $161.6K\nLiquidity: $58.5K\nBuy/sell: 4693/1012\n1H move: +22.4%\nCooked Score: 96/100\n\n--- THREAD ---\n\n$UCASH · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: 7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump\nhttps://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt\n\nSignal before noise. NFA.",
+      "thread": [
+        "COOKED RADAR · SOLANA\n\n$UCASH entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $161.6K\nLiquidity: $58.5K\nBuy/sell: 4693/1012\n1H move: +22.4%\nCooked Score: 96/100",
+        "$UCASH · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: 7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump\nhttps://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt\n\nSignal before noise. NFA."
+      ],
+      "signal": {
+        "chain": "solana",
+        "address": "7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump",
+        "name": "Umbra Cash",
+        "symbol": "UCASH",
+        "url": "https://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt",
+        "age_minutes": 1334.8,
+        "liquidity": 58480.24,
+        "volume_h1": 161589.62,
+        "change_m5": -1.33,
+        "change_h1": 22.44,
+        "buys_h1": 4693,
+        "sells_h1": 1012,
+        "fdv": 564192.0,
+        "score": 96,
+        "image_url": "https://cdn.dexscreener.com/cms/images/P-SyG8Pw8NHzj2jL?width=800&height=800&quality=95&format=auto"
+      }
     }
   ]
 }
