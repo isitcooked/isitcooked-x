@@ -1,15 +1,33 @@
 {
-  "generated_at": "2026-11-23T20:14:28.002119+00:00",
+  "generated_at": "2026-11-24T10:22:35.919402+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "pillar": "culture",
-      "headline": "ME: I WILL WAIT",
-      "subhead": "Also me: buys candle number nine.",
-      "text": "Me: I’ll wait for confirmation.\n\nAlso me after nine green candles: this entry looks early.\n\nThe market charges tuition for impatience.\n\nSignal before noise.",
-      "type": "editorial",
-      "priority": 50
+      "type": "signal",
+      "priority": 81,
+      "text": "COOKED RADAR · SOLANA\n\n$JENSEN entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $30.3K\nLiquidity: $48.9K\nBuy/sell: 4295/3581\n1H move: +45.7%\nCooked Score: 81/100\n\n--- THREAD ---\n\n$JENSEN · RISK CHECK\n\nPromising, not proven. Liquidity and holder behavior still matter.\n\nCA: HKiMA2mKQHU2cjfZ4Kbmru5GBGCauSNqPtpu8cfmpump\nhttps://dexscreener.com/solana/dqpqkbbqr3wmty5ryjoq3nzrrzwbh7h9x2gj7osn9mhh\n\nSignal before noise. NFA.",
+      "thread": [
+        "COOKED RADAR · SOLANA\n\n$JENSEN entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $30.3K\nLiquidity: $48.9K\nBuy/sell: 4295/3581\n1H move: +45.7%\nCooked Score: 81/100",
+        "$JENSEN · RISK CHECK\n\nPromising, not proven. Liquidity and holder behavior still matter.\n\nCA: HKiMA2mKQHU2cjfZ4Kbmru5GBGCauSNqPtpu8cfmpump\nhttps://dexscreener.com/solana/dqpqkbbqr3wmty5ryjoq3nzrrzwbh7h9x2gj7osn9mhh\n\nSignal before noise. NFA."
+      ],
+      "signal": {
+        "chain": "solana",
+        "address": "HKiMA2mKQHU2cjfZ4Kbmru5GBGCauSNqPtpu8cfmpump",
+        "name": "Jensen Is Back",
+        "symbol": "JENSEN",
+        "url": "https://dexscreener.com/solana/dqpqkbbqr3wmty5ryjoq3nzrrzwbh7h9x2gj7osn9mhh",
+        "age_minutes": 993.4,
+        "liquidity": 48945.26,
+        "volume_h1": 30269.18,
+        "change_m5": 2.4,
+        "change_h1": 45.67,
+        "buys_h1": 4295,
+        "sells_h1": 3581,
+        "fdv": 427811.0,
+        "score": 81,
+        "image_url": "https://cdn.dexscreener.com/cms/images/alZ1dz7g561T4WW_?width=800&height=800&quality=95&format=auto"
+      }
     }
   ]
 }
