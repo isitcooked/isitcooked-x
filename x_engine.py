@@ -287,15 +287,26 @@ def make_card(signal: Signal, session: requests.Session, path: Path = CARD_PATH)
         draw.text((230-(box[2]-box[0])/2, 370-(box[3]-box[1])/2), initials, font=font(64, True), fill="#FFFFFF")
 
     # Identity and score.
-    draw.text((420, 225), signal.name.upper()[:28], font=font(32, True), fill="#AAB5CA")
-    draw.text((420, 270), f"${signal.symbol}", font=font(82, True), fill="#FFFFFF")
+    def identity(text, y, size, color):
+        face = font(size, True)
+        while size > 24 and draw.textlength(text, font=face) > 305:
+            size -= 2
+            face = font(size, True)
+        if draw.textlength(text, font=face) > 305:
+            while draw.textlength(text + "…", font=face) > 305:
+                text = text[:-1]
+            text += "…"
+        draw.text((420, y), text, font=face, fill=color)
+
+    identity(signal.name.upper(), 225, 32, "#AAB5CA")
+    identity(f"${signal.symbol}", 270, 82, "#FFFFFF")
     draw.rounded_rectangle((420, 382, 690, 506), radius=24, fill=(8, 16, 34, 235), outline=(48, 224, 255, 175), width=2)
     draw.text((445, 400), "COOKED SCORE", font=font(19, True), fill="#7F91AC")
     draw.text((445, 428), f"{signal.score}", font=font(61, True), fill="#53E7FF")
     draw.text((540, 462), "/100", font=font(22, True), fill="#9D6CFF")
     draw.rounded_rectangle((420, 525, 720, 575), radius=18, fill=(18, 55, 52, 220), outline=(101, 244, 196, 165), width=2)
     draw.ellipse((443, 544, 455, 556), fill=(101, 244, 196, 255))
-    draw.text((472, 538), "MOMENTUM CONFIRMED", font=font(15, True), fill="#65F4C4")
+    draw.text((472, 538), "RADAR WATCHLIST", font=font(18, True), fill="#65F4C4")
 
     metrics = [
         ("1H VOLUME", money(signal.volume_h1)),
