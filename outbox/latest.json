@@ -1,33 +1,15 @@
 {
-  "generated_at": "2026-11-25T15:22:55.043377+00:00",
+  "generated_at": "2026-11-25T20:09:08.394390+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "type": "signal",
-      "priority": 97,
-      "text": "COOKED RADAR · SOLANA\n\n$Pompom entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $136.5K\nLiquidity: $42.5K\nBuy/sell: 1779/1459\n1H move: +54.7%\nCooked Score: 97/100\n\n--- THREAD ---\n\n$Pompom · RISK CHECK\n\nPromising, not proven. Liquidity and holder behavior still matter.\n\nCA: 5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump\nhttps://dexscreener.com/solana/7knydybhbgmdqczmksxqnzg4p4pgc6vperzmfpbptgso\n\nSignal before noise. NFA.",
-      "thread": [
-        "COOKED RADAR · SOLANA\n\n$Pompom entered the radar.\nThis moved onto the radar for structure, not hype.\n\n1H volume: $136.5K\nLiquidity: $42.5K\nBuy/sell: 1779/1459\n1H move: +54.7%\nCooked Score: 97/100",
-        "$Pompom · RISK CHECK\n\nPromising, not proven. Liquidity and holder behavior still matter.\n\nCA: 5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump\nhttps://dexscreener.com/solana/7knydybhbgmdqczmksxqnzg4p4pgc6vperzmfpbptgso\n\nSignal before noise. NFA."
-      ],
-      "signal": {
-        "chain": "solana",
-        "address": "5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
-        "name": "Pompompurin",
-        "symbol": "Pompom",
-        "url": "https://dexscreener.com/solana/7knydybhbgmdqczmksxqnzg4p4pgc6vperzmfpbptgso",
-        "age_minutes": 246.2,
-        "liquidity": 42530.47,
-        "volume_h1": 136466.5,
-        "change_m5": 0.0,
-        "change_h1": 54.69,
-        "buys_h1": 1779,
-        "sells_h1": 1459,
-        "fdv": 311809.0,
-        "score": 97,
-        "image_url": "https://cdn.dexscreener.com/cms/images/0HT78qiKKsARxSPi?width=800&height=800&quality=95&format=auto"
-      }
+      "pillar": "culture",
+      "headline": "ME: I WILL WAIT",
+      "subhead": "Also me: buys candle number nine.",
+      "text": "Me: I’ll wait for confirmation.\n\nAlso me after nine green candles: this entry looks early.\n\nThe market charges tuition for impatience.\n\nSignal before noise.",
+      "type": "editorial",
+      "priority": 50
     }
   ]
 }
