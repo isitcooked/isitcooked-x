@@ -1,15 +1,33 @@
 {
-  "generated_at": "2026-11-25T20:09:08.394390+00:00",
+  "generated_at": "2026-11-26T10:24:44.990724+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "pillar": "culture",
-      "headline": "ME: I WILL WAIT",
-      "subhead": "Also me: buys candle number nine.",
-      "text": "Me: I’ll wait for confirmation.\n\nAlso me after nine green candles: this entry looks early.\n\nThe market charges tuition for impatience.\n\nSignal before noise.",
-      "type": "editorial",
-      "priority": 50
+      "type": "signal",
+      "priority": 96,
+      "text": "COOKED RADAR · SOLANA\n\n$PUMPCHAN entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $915.7K\nLiquidity: $182.8K\nBuy/sell: 6622/3936\n1H move: +10.6%\nCooked Score: 96/100\n\n--- THREAD ---\n\n$PUMPCHAN · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump\nhttps://dexscreener.com/solana/ddcyemq9bkyqtc93djkwah6vamkcjvsocuvgv29q7teb\n\nSignal before noise. NFA.",
+      "thread": [
+        "COOKED RADAR · SOLANA\n\n$PUMPCHAN entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $915.7K\nLiquidity: $182.8K\nBuy/sell: 6622/3936\n1H move: +10.6%\nCooked Score: 96/100",
+        "$PUMPCHAN · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump\nhttps://dexscreener.com/solana/ddcyemq9bkyqtc93djkwah6vamkcjvsocuvgv29q7teb\n\nSignal before noise. NFA."
+      ],
+      "signal": {
+        "chain": "solana",
+        "address": "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump",
+        "name": "PumpChan",
+        "symbol": "PUMPCHAN",
+        "url": "https://dexscreener.com/solana/ddcyemq9bkyqtc93djkwah6vamkcjvsocuvgv29q7teb",
+        "age_minutes": 533.6,
+        "liquidity": 182847.25,
+        "volume_h1": 915722.62,
+        "change_m5": -4.98,
+        "change_h1": 10.61,
+        "buys_h1": 6622,
+        "sells_h1": 3936,
+        "fdv": 6174913.0,
+        "score": 96,
+        "image_url": "https://cdn.dexscreener.com/cms/images/CYjfRp88d-kmoxOb?width=800&height=800&quality=95&format=auto"
+      }
     }
   ]
 }
