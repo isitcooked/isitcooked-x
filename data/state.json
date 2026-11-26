@@ -40,8 +40,13 @@
       "first_seen": "2026-11-26T10:24:44.990724+00:00",
       "score": 96,
       "symbol": "PUMPCHAN"
+    },
+    "3gmFG4sFDJErDV8pacFrL2uUPXeGJTYLjfRy4hFypump": {
+      "first_seen": "2026-11-26T15:18:22.743540+00:00",
+      "score": 87,
+      "symbol": "NORFEATH"
     }
   },
   "recent_hooks": [],
-  "last_run": "2026-11-26T10:24:44.990724+00:00"
+  "last_run": "2026-11-26T15:18:22.743540+00:00"
 }

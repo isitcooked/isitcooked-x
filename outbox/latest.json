@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-11-26T10:24:44.990724+00:00",
+  "generated_at": "2026-11-26T15:18:22.743540+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
       "type": "signal",
-      "priority": 96,
-      "text": "COOKED RADAR · SOLANA\n\n$PUMPCHAN entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $915.7K\nLiquidity: $182.8K\nBuy/sell: 6622/3936\n1H move: +10.6%\nCooked Score: 96/100\n\n--- THREAD ---\n\n$PUMPCHAN · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump\nhttps://dexscreener.com/solana/ddcyemq9bkyqtc93djkwah6vamkcjvsocuvgv29q7teb\n\nSignal before noise. NFA.",
+      "priority": 87,
+      "text": "COOKED RADAR · SOLANA\n\n$NORFEATH entered the radar.\nThe candle caught attention. The order flow earned a closer look.\n\n1H volume: $59.7K\nLiquidity: $55.8K\nBuy/sell: 14995/8796\n1H move: +40.4%\nCooked Score: 87/100\n\n--- THREAD ---\n\n$NORFEATH · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: 3gmFG4sFDJErDV8pacFrL2uUPXeGJTYLjfRy4hFypump\nhttps://dexscreener.com/solana/fuzscatzzst9rzmtt2pcdlppj1ikyc5lgdnjytfwyqdj\n\nSignal before noise. NFA.",
       "thread": [
-        "COOKED RADAR · SOLANA\n\n$PUMPCHAN entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $915.7K\nLiquidity: $182.8K\nBuy/sell: 6622/3936\n1H move: +10.6%\nCooked Score: 96/100",
-        "$PUMPCHAN · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump\nhttps://dexscreener.com/solana/ddcyemq9bkyqtc93djkwah6vamkcjvsocuvgv29q7teb\n\nSignal before noise. NFA."
+        "COOKED RADAR · SOLANA\n\n$NORFEATH entered the radar.\nThe candle caught attention. The order flow earned a closer look.\n\n1H volume: $59.7K\nLiquidity: $55.8K\nBuy/sell: 14995/8796\n1H move: +40.4%\nCooked Score: 87/100",
+        "$NORFEATH · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: 3gmFG4sFDJErDV8pacFrL2uUPXeGJTYLjfRy4hFypump\nhttps://dexscreener.com/solana/fuzscatzzst9rzmtt2pcdlppj1ikyc5lgdnjytfwyqdj\n\nSignal before noise. NFA."
       ],
       "signal": {
         "chain": "solana",
-        "address": "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump",
-        "name": "PumpChan",
-        "symbol": "PUMPCHAN",
-        "url": "https://dexscreener.com/solana/ddcyemq9bkyqtc93djkwah6vamkcjvsocuvgv29q7teb",
-        "age_minutes": 533.6,
-        "liquidity": 182847.25,
-        "volume_h1": 915722.62,
-        "change_m5": -4.98,
-        "change_h1": 10.61,
-        "buys_h1": 6622,
-        "sells_h1": 3936,
-        "fdv": 6174913.0,
-        "score": 96,
-        "image_url": "https://cdn.dexscreener.com/cms/images/CYjfRp88d-kmoxOb?width=800&height=800&quality=95&format=auto"
+        "address": "3gmFG4sFDJErDV8pacFrL2uUPXeGJTYLjfRy4hFypump",
+        "name": "Norfeather",
+        "symbol": "NORFEATH",
+        "url": "https://dexscreener.com/solana/fuzscatzzst9rzmtt2pcdlppj1ikyc5lgdnjytfwyqdj",
+        "age_minutes": 1092.7,
+        "liquidity": 55795.24,
+        "volume_h1": 59721.33,
+        "change_m5": 5.7,
+        "change_h1": 40.4,
+        "buys_h1": 14995,
+        "sells_h1": 8796,
+        "fdv": 550308.0,
+        "score": 87,
+        "image_url": "https://cdn.dexscreener.com/cms/images/R9eev_vvDhfU3oqw?width=800&height=800&quality=95&format=auto"
       }
     }
   ]
