@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-27T10:21:34.694616+00:00",
+  "generated_at": "2026-11-27T15:12:25.261338+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "pillar": "authority",
-      "headline": "PUBLIC RECEIPTS > HYPE",
-      "subhead": "Wins and losses stay visible.",
-      "text": "Anyone can screenshot a winner.\n\nAuthority starts when every signal gets a public receipt — including the ugly ones.\n\nNo deleted misses. No invented certainty.\n\nSignal before noise.",
+      "pillar": "education",
+      "headline": "BUY PRESSURE CAN FAKE YOU",
+      "subhead": "Count quality, not only quantity.",
+      "text": "1,000 buys and 400 sells looks bullish.\n\nUntil 980 buys are dust-sized bot transactions.\n\nTransaction count needs trade-size and wallet context.\n\nSignal before noise.",
       "type": "editorial",
       "priority": 50
     }
