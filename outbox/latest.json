@@ -1,15 +1,33 @@
 {
-  "generated_at": "2026-11-27T20:11:49.734709+00:00",
+  "generated_at": "2026-11-28T10:04:07.479442+00:00",
   "account": "@isitcooked1",
   "requires_human_review": true,
   "items": [
     {
-      "pillar": "culture",
-      "headline": "ME: I WILL WAIT",
-      "subhead": "Also me: buys candle number nine.",
-      "text": "Me: I’ll wait for confirmation.\n\nAlso me after nine green candles: this entry looks early.\n\nThe market charges tuition for impatience.\n\nSignal before noise.",
-      "type": "editorial",
-      "priority": 50
+      "type": "signal",
+      "priority": 91,
+      "text": "COOKED RADAR · SOLANA\n\n$BITCOINU entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $66.1K\nLiquidity: $82.0K\nBuy/sell: 9520/7074\n1H move: +8.6%\nCooked Score: 91/100\n\n--- THREAD ---\n\n$BITCOINU · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: ATbAsdCwrhhVg23DRnWpjqx6kx7ivoK5o8ysNmu1pump\nhttps://dexscreener.com/solana/g57cfxedfwpusmyurzzsjyckzykxrmu6csxfzaojgot7\n\nSignal before noise. NFA.",
+      "thread": [
+        "COOKED RADAR · SOLANA\n\n$BITCOINU entered the radar.\nEarly momentum is forming — but momentum is not proof.\n\n1H volume: $66.1K\nLiquidity: $82.0K\nBuy/sell: 9520/7074\n1H move: +8.6%\nCooked Score: 91/100",
+        "$BITCOINU · RISK CHECK\n\nA radar signal is a reason to investigate — never a reason to chase.\n\nCA: ATbAsdCwrhhVg23DRnWpjqx6kx7ivoK5o8ysNmu1pump\nhttps://dexscreener.com/solana/g57cfxedfwpusmyurzzsjyckzykxrmu6csxfzaojgot7\n\nSignal before noise. NFA."
+      ],
+      "signal": {
+        "chain": "solana",
+        "address": "ATbAsdCwrhhVg23DRnWpjqx6kx7ivoK5o8ysNmu1pump",
+        "name": "Bitcoin Inu",
+        "symbol": "BITCOINU",
+        "url": "https://dexscreener.com/solana/g57cfxedfwpusmyurzzsjyckzykxrmu6csxfzaojgot7",
+        "age_minutes": 316.8,
+        "liquidity": 82014.73,
+        "volume_h1": 66132.36,
+        "change_m5": -0.7,
+        "change_h1": 8.62,
+        "buys_h1": 9520,
+        "sells_h1": 7074,
+        "fdv": 1278799.0,
+        "score": 91,
+        "image_url": "https://cdn.dexscreener.com/cms/images/IgFeqFmdAF82WDWd?width=800&height=800&quality=95&format=auto"
+      }
     }
   ]
 }
